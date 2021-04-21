@@ -1,69 +1,84 @@
 import {Dispatch} from "redux";
 import Api, {TypePhoto} from "../../api/api";
-const setPhotoAC = (photos:TypePhoto[])=>{
-    return{
-        type:'/reducer/SET_PHOTO',
+
+const setPhotoAC = (photos: TypePhoto[]) => {
+    return {
+        type: '/reducer/SET_PHOTO',
         photos
     } as const
 }
-const setErrorAC = (error:string)=>{
-    return{
-        type:'/reducer/SET_ERROR',
+const setErrorAC = (error: string) => {
+    return {
+        type: '/reducer/SET_ERROR',
         error
     } as const
 }
-const setStatusAC = (status:TypeStatus)=>{
-    return{
-        type:'/reducer/SET_STATUS',
+const setStatusAC = (status: TypeStatus) => {
+    return {
+        type: '/reducer/SET_STATUS',
         status
     } as const
 }
-const initialState:TypeInitialState = {
-    photos:[],
-    error:'',
-    status:'free'
+const setPagesAC = (pages: number) => {
+    return {
+        type: '/reducer/SET_PAGES',
+        pages
+    } as const
+}
+const initialState: TypeInitialState = {
+    photos: [],
+    error: '',
+    status: 'free',
+    pages: 0
 }
 
-const Reducer = (state:TypeInitialState=initialState,action:TypeActions):TypeInitialState=>{
-    switch(action.type){
-        case "/reducer/SET_PHOTO":{
+const Reducer = (state: TypeInitialState = initialState, action: TypeActions): TypeInitialState => {
+    switch (action.type) {
+        case "/reducer/SET_PHOTO": {
             return {
                 ...state,
-                photos:action.photos
+                photos: action.photos
             }
         }
-        case "/reducer/SET_ERROR":{
+        case "/reducer/SET_ERROR": {
             return {
                 ...state,
-                error:action.error
+                error: action.error
             }
         }
-        case "/reducer/SET_STATUS":{
+        case "/reducer/SET_STATUS": {
             return {
                 ...state,
-                status:action.status
+                status: action.status
             }
         }
+        case "/reducer/SET_PAGES":{
+            return {
+                ...state,
+                pages:action.pages
+            }
+        }
+
 
         default:
             return state
     }
 }
-// var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
-export const getPhotoTC = (tag:string)=> async (dispatch:Dispatch<TypeActions>)=>{
+export const getPhotoTC = (tag: string, page: string) => async (dispatch: Dispatch<TypeActions>) => {
     dispatch(setStatusAC("loading"))
     try {
-        let result =  await  Api.getPhoto(tag)
-            if(result.stat==='ok'){
-                dispatch(setPhotoAC(result.photos.photo))
-                dispatch(setStatusAC("loading"))
+        let result = await Api.getPhoto(tag, page)
+        if (result.stat === 'ok') {
+            dispatch(setPhotoAC(result.photos.photo))
+            dispatch(setPagesAC(result.photos.pages))
+            dispatch(setStatusAC("loading"))
 
-            }else{
-                dispatch(setStatusAC("error"))
-                dispatch(setErrorAC('Some error'))
-            }
+        } else {
+            dispatch(setStatusAC("error"))
+            dispatch(setErrorAC('Some error'))
+        }
 
-    }catch (e) {
+    } catch (e) {
         dispatch(setStatusAC("error"))
         dispatch(setErrorAC(e))
     }
@@ -73,10 +88,12 @@ type TypeActions =
     | ReturnType<typeof setPhotoAC>
     | ReturnType<typeof setErrorAC>
     | ReturnType<typeof setStatusAC>
-type TypeStatus = 'free'|'loading'|'success'|'error'
+    | ReturnType<typeof setPagesAC>;
+type TypeStatus = 'free' | 'loading' | 'success' | 'error'
 type TypeInitialState = {
-    error:string
-    status:TypeStatus
-    photos:TypePhoto[]|[]
+    error: string
+    status: TypeStatus
+    photos: TypePhoto[] | []
+    pages: number
 }
 export default Reducer;

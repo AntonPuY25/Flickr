@@ -1,6 +1,6 @@
 .header{
     grid-area: header;
-    background-color: #304159;
+    background-color: #e4e7e8;
 }
 .menu{
     grid-area: menu;

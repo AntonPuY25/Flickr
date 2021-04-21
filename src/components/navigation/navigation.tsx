@@ -1,7 +1,8 @@
 import React from 'react';
 
 export const PATH={
-    search:'/search',
+    main:'/main',
+    pictures:'/pictures',
     bookmarks:'/bookmarks',
     pageNotFound: "*",
     page404: "/pageNotFound",
