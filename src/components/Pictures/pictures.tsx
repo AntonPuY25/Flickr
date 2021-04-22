@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {
     getPhotosSelectors,
@@ -9,27 +9,38 @@ import {TypePhoto} from "../../api/api";
 import Photo from "../../common/photoContainer/photo";
 import Pagination from "../../common/pagination/pagination";
 import {getPhotoTC} from "../../store/reducers/reducer";
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 
 const Pictures = () => {
-    const photos:TypeGetPhotosSelectors = useSelector(getPhotosSelectors)
+
+    const photos: TypeGetPhotosSelectors = useSelector(getPhotosSelectors)
     const dispatch = useDispatch()
     const searchValue = sessionStorage.getItem('searchValue');
     const {id} = useParams<{ id: string }>()
-useEffect(()=>{
-    dispatch(getPhotoTC(searchValue!,id))
-},[dispatch,searchValue,id])
+    useEffect(() => {
+        if(!localStorage.getItem('photos')){
+            localStorage.setItem('photos', JSON.stringify([]))
+        }
 
+    }, [])
+
+    const [test,setTest]= useState(localStorage.getItem('photos'))
+
+    useEffect(() => {
+        dispatch(getPhotoTC(searchValue!, id))
+
+    }, [dispatch, searchValue, id])
+
+    console.log(test)
     return <>
         <div>
 
         </div>
         <Pagination/>
-        {photos.map((pic:TypePhoto)=>{
-            const srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
-            return(
+        {photos.map((pic: TypePhoto) => {
+            return (
                 <div key={pic.id}>
-                    <Photo srcPath={srcPath} title={pic.title} />
+                    <Photo pic={pic}  photoFromLocalStorage={test} setTest={setTest}/>
                 </div>
 
             )
