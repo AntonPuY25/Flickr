@@ -43,7 +43,7 @@ const Photo: React.FC<TestType> = ({pic,photoFromLocalStorage,setTest}) => {
 
             <CardContent>
 
-                <Typography variant="h6" component="h1" style={{textAlign: 'center'}}>
+                <Typography variant="h5" component="h1" style={{textAlign: 'center'}}>
                     {pic.title}
                 </Typography>
                 <div className={s.photo}>

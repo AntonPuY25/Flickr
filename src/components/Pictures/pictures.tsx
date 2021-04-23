@@ -7,9 +7,9 @@ import {
 } from "../../store/selectors/selectorReducer";
 import {TypePhoto} from "../../api/api";
 import Photo from "../../common/photoContainer/photo";
-import Pagination from "../../common/pagination/pagination";
 import {getPhotoTC} from "../../store/reducers/reducer";
 import {useParams} from 'react-router-dom';
+import PaginationPage from "../../common/pagination/paginationPage";
 
 const Pictures = () => {
 
@@ -31,12 +31,11 @@ const Pictures = () => {
 
     }, [dispatch, searchValue, id])
 
-    console.log(test)
     return <>
         <div>
 
         </div>
-        <Pagination/>
+        <PaginationPage/>
         {photos.map((pic: TypePhoto) => {
             return (
                 <div key={pic.id}>
