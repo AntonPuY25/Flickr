@@ -41,7 +41,6 @@ const Pictures = () => {
                 <div key={pic.id}>
                     <Photo pic={pic}  photoFromLocalStorage={test} setTest={setTest}/>
                 </div>
-
             )
         })}
 

@@ -8,8 +8,8 @@ import Footer from "./components/footer/footer";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Bookmarks from "./components/bookmarks/bookmarks";
 import NotFound from "./components/notFound/notFound";
-import Main from "./components/search/main";
 import Pictures from "./components/Pictures/pictures";
+import Main from "./components/main/main";
 
 function App() {
 

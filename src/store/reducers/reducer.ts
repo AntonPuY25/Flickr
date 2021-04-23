@@ -1,31 +1,31 @@
 import {Dispatch} from "redux";
 import Api, {TypePhoto} from "../../api/api";
 
-const setPhotoAC = (photos: TypePhoto[]) => {
+export const setPhotoAC = (photos: TypePhoto[]) => {
     return {
         type: '/reducer/SET_PHOTO',
         photos
     } as const
 }
-const setErrorAC = (error: string) => {
+export const setErrorAC = (error: string) => {
     return {
         type: '/reducer/SET_ERROR',
         error
     } as const
 }
-const setStatusAC = (status: TypeStatus) => {
+export const setStatusAC = (status: TypeStatus) => {
     return {
         type: '/reducer/SET_STATUS',
         status
     } as const
 }
-const setPagesAC = (pages: number) => {
+export const setPagesAC = (pages: number) => {
     return {
         type: '/reducer/SET_PAGES',
         pages
     } as const
 }
-const initialState: TypeInitialState = {
+export const initialState: TypeInitialState = {
     photos: [],
     error: '',
     status: 'free',
@@ -90,7 +90,7 @@ type TypeActions =
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof setPagesAC>;
 type TypeStatus = 'free' | 'loading' | 'success' | 'error'
-type TypeInitialState = {
+export type TypeInitialState = {
     error: string
     status: TypeStatus
     photos: TypePhoto[] | []

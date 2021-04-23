@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import s from './photo.module.scss'
 import {Button} from "@material-ui/core";
 import {TypePhoto} from "../../api/api";
+import Tilt from 'react-parallax-tilt';
 
 type TestType = {
     pic: TypePhoto
@@ -46,9 +47,13 @@ const Photo: React.FC<TestType> = ({pic,photoFromLocalStorage,setTest}) => {
                 <Typography variant="h5" component="h1" style={{textAlign: 'center'}}>
                     {pic.title}
                 </Typography>
+                <Tilt className="Tilt" tiltMaxAngleX={10}
+                      tiltMaxAngleY={10} glareColor={'#ffffff'} >
                 <div className={s.photo}>
-                    <img src={srcPath} alt="photos"></img>
+                        <img src={srcPath} alt="photos"></img>
                 </div>
+                </Tilt>
+
             </CardContent>
             <div>
                 {deletePhoto ?
