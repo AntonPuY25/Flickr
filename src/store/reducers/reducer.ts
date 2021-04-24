@@ -1,5 +1,5 @@
-import {Dispatch} from "redux";
-import Api, {TypePhoto} from "../../api/api";
+import {Dispatch} from "redux"
+import Api, {TypePhoto} from "../../api/api"
 
 export const setPhotoAC = (photos: TypePhoto[]) => {
     return {
@@ -52,10 +52,10 @@ const Reducer = (state: TypeInitialState = initialState, action: TypeActions): T
                 status: action.status
             }
         }
-        case "/reducer/SET_PAGES":{
+        case "/reducer/SET_PAGES": {
             return {
                 ...state,
-                pages:action.pages
+                pages: action.pages
             }
         }
 
@@ -88,7 +88,7 @@ type TypeActions =
     | ReturnType<typeof setPhotoAC>
     | ReturnType<typeof setErrorAC>
     | ReturnType<typeof setStatusAC>
-    | ReturnType<typeof setPagesAC>;
+    | ReturnType<typeof setPagesAC>
 type TypeStatus = 'free' | 'loading' | 'success' | 'error'
 export type TypeInitialState = {
     error: string
@@ -96,4 +96,4 @@ export type TypeInitialState = {
     photos: TypePhoto[] | []
     pages: number
 }
-export default Reducer;
+export default Reducer

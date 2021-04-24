@@ -1,30 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from "react-redux"
 import {
     getPhotosSelectors,
     TypeGetPhotosSelectors,
 
-} from "../../store/selectors/selectorReducer";
-import {TypePhoto} from "../../api/api";
-import Photo from "../../common/photoContainer/photo";
-import {getPhotoTC} from "../../store/reducers/reducer";
-import {useParams} from 'react-router-dom';
-import PaginationPage from "../../common/pagination/paginationPage";
+} from "../../store/selectors/selectorReducer"
+import {TypePhoto} from "../../api/api"
+import Photo from "../../common/photoContainer/photo"
+import {getPhotoTC} from "../../store/reducers/reducer"
+import {useParams} from 'react-router-dom'
+import PaginationPage from "../../common/pagination/paginationPage"
 
 const Pictures = () => {
-
     const photos: TypeGetPhotosSelectors = useSelector(getPhotosSelectors)
     const dispatch = useDispatch()
-    const searchValue = sessionStorage.getItem('searchValue');
+    const searchValue = sessionStorage.getItem('searchValue')
     const {id} = useParams<{ id: string }>()
     useEffect(() => {
-        if(!localStorage.getItem('photos')){
+        if (!localStorage.getItem('photos')) {
             localStorage.setItem('photos', JSON.stringify([]))
         }
 
     }, [])
 
-    const [test,setTest]= useState(localStorage.getItem('photos'))
+    const [test, setTest] = useState(localStorage.getItem('photos'))
 
     useEffect(() => {
         dispatch(getPhotoTC(searchValue!, id))
@@ -32,21 +31,16 @@ const Pictures = () => {
     }, [dispatch, searchValue, id])
 
     return <>
-        <div>
-
-        </div>
         <PaginationPage/>
         {photos.map((pic: TypePhoto) => {
             return (
                 <div key={pic.id}>
-                    <Photo pic={pic}  photoFromLocalStorage={test} setTest={setTest}/>
+                    <Photo pic={pic} photoFromLocalStorage={test} setTest={setTest}/>
                 </div>
             )
         })}
 
     </>
-
 }
 
-
-export default Pictures;
+export default Pictures

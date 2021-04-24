@@ -1,18 +1,19 @@
-.container{
+.container {
   width: 500px;
   height: 550px;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   margin: 30px;
   float: left;
+
   .photo {
     text-align: center;
 
     img {
-      width:400px;
-      height:350px;
+      width: 400px;
+      height: 350px;
     }
   }
 }

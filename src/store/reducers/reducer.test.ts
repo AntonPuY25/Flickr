@@ -1,6 +1,6 @@
-import Reducer, {setErrorAC, setPagesAC, setPhotoAC, setStatusAC, TypeInitialState} from "./reducer";
+import Reducer, {setErrorAC, setPagesAC, setPhotoAC, setStatusAC, TypeInitialState} from "./reducer"
 
-let state: TypeInitialState;
+let state: TypeInitialState
 
 beforeEach(() => {
     state = {

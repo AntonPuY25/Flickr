@@ -1,20 +1,24 @@
-.header{
+.header {
     grid-area: header;
     background-color: #e4e7e8;
 }
-.menu{
+
+.menu {
     grid-area: menu;
     background-color: #F0F2F7;
 }
-.content{
+
+.content {
     grid-area: content;
     background-color: #F0F2F7;
 }
-.footer{
+
+.footer {
     grid-area: footer;
     background-color: darkgrey;
 }
-.container{
+
+.container {
     display: grid;
     grid-template-areas: "header header"
                           "menu content"
@@ -22,4 +26,35 @@
     grid-template-columns: 10% 90%;
     grid-template-rows: 50px 1fr 50px;
     min-height: 100vh;
+}
+
+.popup {
+    width: 100%;
+    height: 2000px;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    position: fixed;
+    top: 0px;
+    z-index: 5;
+
+}
+
+.popup .popupContent {
+    position: relative;
+    margin: 40px auto 0px auto;
+    width: 250px;
+    height: 130px;
+    padding: 10px;
+    background-color: #ded3d3;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hide {
+    display: none;
 }

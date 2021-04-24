@@ -1,18 +1,21 @@
 .pagination {
   text-align: right;
   position: relative;
-  padding:7px;
-  right:1.5%;
+  padding: 7px;
+  right: 1.5%;
 
 }
-.page{
-  padding:4px;
+
+.page {
+  padding: 4px;
   cursor: pointer;
   border: 1px solid black;
 }
-.active{
+
+.active {
   font-weight: bold;
 }
-.sort{
-  cursor:pointer;
+
+.sort {
+  cursor: pointer;
 }

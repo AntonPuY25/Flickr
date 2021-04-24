@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
-import {PATH} from "../navigation/navigation";
 import {FormControl} from "@material-ui/core";
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -8,6 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import s from './header.module.scss'
 import profile from '../../images/profile.png'
+import {PATH} from "../../App";
 
 const Header = () => {
     const [searchValue, setSearchValue] = useState<string>('')
@@ -23,13 +23,12 @@ const Header = () => {
     }
     return <div className={s.header}>
         <div className={s.icon}>
-            <a href="#"> <img src={profile} alt={'Profile'}/></a>
+             <img src={profile} alt={'Profile'}/>
         </div>
         <div className={s.input}>
             <FormControl>
                 <InputLabel htmlFor="standard-adornment-password">Search</InputLabel>
                 <Input
-
                     onChange={(e) => setSearchValue(e.currentTarget.value)}
                     id="standard-adornment-password"
                     endAdornment={
@@ -52,4 +51,4 @@ const Header = () => {
 }
 
 
-export default Header;
+export default Header

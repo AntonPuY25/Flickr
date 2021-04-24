@@ -1,4 +1,4 @@
-import {AppRootStateType} from "../store";
+import {AppRootStateType} from "../store"
 
 
 export const getPhotosSelectors = (state: AppRootStateType) => {
