@@ -5,9 +5,9 @@ import axios from "axios"
 // })
 const apiKey = '1e4d008b9e277248c98d6bec026aaf74'
 export const Api = {
-    getPhoto(tag:string,page:string){
+    getPhoto(textValue:string,page:string){
         return axios.get<TypeResponseData>(
-            `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tag}&per_page=10&page=${page}&format=json&nojsoncallback=1`)
+            `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${textValue}&per_page=10&page=${page}&format=json&nojsoncallback=1`)
             .then(response=>{
              return response.data
         })

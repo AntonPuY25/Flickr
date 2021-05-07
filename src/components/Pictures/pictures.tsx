@@ -7,9 +7,10 @@ import {
 } from "../../store/selectors/selectorReducer"
 import {TypePhoto} from "../../api/api"
 import Photo from "../../common/photoContainer/photo"
-import {getPhotoTC} from "../../store/reducers/reducer"
+// import {getPhotoTC} from "../../store/reducers/reducer"
 import {useParams} from 'react-router-dom'
 import PaginationPage from "../../common/pagination/paginationPage"
+import {getPhotoSagaAC} from "../../store/reducers/reducer";
 
 const Pictures = () => {
     const photos: TypeGetPhotosSelectors = useSelector(getPhotosSelectors)
@@ -26,9 +27,9 @@ const Pictures = () => {
     const [test, setTest] = useState(localStorage.getItem('photos'))
 
     useEffect(() => {
-        dispatch(getPhotoTC(searchValue!, id))
+        dispatch(getPhotoSagaAC(searchValue!,id))
 
-    }, [dispatch, searchValue, id])
+    }, [dispatch,searchValue,id])
 
     return <>
         <PaginationPage/>

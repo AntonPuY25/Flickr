@@ -13,7 +13,6 @@ beforeEach(() => {
 test('setErrorAC', () => {
     const action = setErrorAC('Some Error')
     const result = Reducer(state, action)
-
     expect(result.error.length > 0).toBe(true)
     expect(result.error).toBe('Some Error')
 })
@@ -63,3 +62,4 @@ test('setPagesAC', () => {
     expect(result.pages).toBe(1)
 
 })
+

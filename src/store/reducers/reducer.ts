@@ -1,6 +1,5 @@
-import {Dispatch} from "redux"
-import Api, {TypePhoto} from "../../api/api"
-
+import Api, {TypePhoto, TypeResponseData} from "../../api/api"
+import {put, call, takeEvery} from 'redux-saga/effects'
 export const setPhotoAC = (photos: TypePhoto[]) => {
     return {
         type: '/reducer/SET_PHOTO',
@@ -64,24 +63,37 @@ const Reducer = (state: TypeInitialState = initialState, action: TypeActions): T
             return state
     }
 }
-export const getPhotoTC = (tag: string, page: string) => async (dispatch: Dispatch<TypeActions>) => {
-    dispatch(setStatusAC("loading"))
+ export function*  getPhotoSaga(action:TypeActionSaga){
+   yield put(setStatusAC("loading"))
     try {
-        let result = await Api.getPhoto(tag, page)
+        const result:TypeResponseData = yield call(Api.getPhoto,action.textValue,action.page)
         if (result.stat === 'ok') {
-            dispatch(setPhotoAC(result.photos.photo))
-            dispatch(setPagesAC(result.photos.pages))
-            dispatch(setStatusAC("loading"))
+            yield put(setPhotoAC(result.photos.photo))
+            yield put(setPagesAC(result.photos.pages))
+            yield put(setStatusAC("success"))
 
         } else {
-            dispatch(setStatusAC("error"))
-            dispatch(setErrorAC('Some error'))
+            yield put(setStatusAC("error"))
+            yield put(setErrorAC('Some error'))
         }
 
     } catch (e) {
-        dispatch(setStatusAC("error"))
-        dispatch(setErrorAC(e))
+        yield put(setStatusAC("error"))
+        yield put(setErrorAC(e))
     }
+}
+ export const getPhotoSagaAC = (textValue:string,page:string) =>{
+    return {
+    type: "REDUCER/GET_PHOTO_SAGA",
+        textValue,page
+
+    } as const
+}
+export type TypeActionSaga = ReturnType<typeof getPhotoSagaAC>
+
+export function* watcherSaga(){
+    yield takeEvery("REDUCER/GET_PHOTO_SAGA", getPhotoSaga)
+
 }
 
 type TypeActions =
